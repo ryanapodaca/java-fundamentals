@@ -1,5 +1,7 @@
 package basics;
 import java.util.Random;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Main {
   public static void main(String[] args) {
@@ -25,7 +27,7 @@ public class Main {
     return word;
   }
 
-  public static int flipNHeads(int n) {
+  public static void flipNHeads(int n) {
     Random rand = new Random();
     int flips = 0;
     int headsInRow = 0;
@@ -53,10 +55,14 @@ public class Main {
     
     System.out.println("It took" + flips + "flips to flip" + n + "heads in a row");
     
-    return flips;
   }
 
   public static void clock() {
-
+    LocalTime now = LocalTime.now();
+    String time = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+    System.out.println(time);
   }
+
+  flipNHeads(3);
+
 }
