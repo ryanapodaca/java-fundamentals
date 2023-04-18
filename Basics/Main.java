@@ -28,7 +28,7 @@ public class Main {
     Random rand = new Random();
     int flips = 0;
     int headsInRow = 0;
-    int lastResult = 0;
+    int lastResult = 1;
     while (n > headsInRow) {
       int result = rand.nextInt(2);
 
@@ -38,15 +38,21 @@ public class Main {
         flips++;
         if (lastResult == result){
           headsInRow++;
+        } else {
+          headsInRow = 1;
         }
         lastResult = result;
       } else if (result == 0){
         System.out.println("Tails");
         flips++;
         lastResult = result;
+        headsInRow = 0;
       }
     }
+    
     System.out.println("It took" + flips + "flips to flip" + n + "heads in a row");
+    
+    return flips;
   }
 
   public static void clock() {
