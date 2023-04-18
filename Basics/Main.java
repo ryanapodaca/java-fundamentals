@@ -16,12 +16,14 @@ public class Main {
 
     int turtleCount = 0;
     System.out.println("I own " + turtleCount + " " + pluralize("turtle", turtleCount) + ".");
+    
+    flipNHeads(3);
+    clock();
   }
 
 
-
   public static String pluralize(String word, int n) {
-    if (n == 0 || n < 1) {
+    if (n == 0 || n > 1) {
       word = word + "s";
     }
     return word;
@@ -53,7 +55,7 @@ public class Main {
       }
     }
     
-    System.out.println("It took" + flips + "flips to flip" + n + "heads in a row");
+    System.out.println("It took " + flips + " flips to flip heads " + n + " times in a row.");
     
   }
 
@@ -62,7 +64,5 @@ public class Main {
     String time = now.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
     System.out.println(time);
   }
-
-  flipNHeads(3);
 
 }
