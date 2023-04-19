@@ -19,13 +19,25 @@ public class Library {
     }
 
     public static boolean containsDuplicates(int[] array){
-       for (int i = 0; i < array.length; i++){
-
+        boolean hasDuplicates = false;
+        for (int i = 0; i < array.length; i++){
+          for (int j = i + 1; j < array.length; j++){
+              if (array[i] == array[j]){
+                  hasDuplicates = true;
+                  break;
+              }
+          }
        }
+       return hasDuplicates;
     }
 
-    public static int averages(int[]array){
-
+    public static float averages(int[]array){
+        int acc = 0;
+        for (int i = 0; i < array.length; i++) {
+          acc= acc + array[i];
+        }
+        float ave = (float)acc / (float)array.length;
+        return ave;
     }
 
     public static int[] arrays(){
