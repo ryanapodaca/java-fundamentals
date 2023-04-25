@@ -39,7 +39,7 @@ public class Restaurant {
     }
 
     public String toString() {
-
+        StringBuilder sb = new StringBuilder();
     }
 
     public String addReview(int rating) {
