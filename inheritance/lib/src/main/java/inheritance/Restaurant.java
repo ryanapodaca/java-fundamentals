@@ -42,7 +42,7 @@ public class Restaurant {
         StringBuilder sb = new StringBuilder();
     }
 
-    public String addReview(int rating) {
+    public void addReview(int rating) {
         totalRatings.add(rating);
         int acc = 0;
         for (int r:totalRatings) {
