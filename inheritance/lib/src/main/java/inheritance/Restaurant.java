@@ -7,47 +7,33 @@ import java.util.ArrayList;
 
 public class Restaurant {
     String name;
-    int stars;
+    float stars;
     String category;
 
-    ArrayList<Integer> totalRatings = new ArrayList<>();
+    ArrayList<Review> totalReviews = new ArrayList<>();
 
-    public Restaurant(String name, int stars, String category) {
-        this. name = name;
-        this.stars = stars;
-        this.category = category;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Restaurant(String name, String category) {
         this.name = name;
-    }
-
-    public int getStars() {
-        return stars;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
         this.category = category;
     }
+
 
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        return "Restaurant\nname= " + name +
+                "\nstars= " + stars +
+                "\ncategory= " + category;
     }
 
-    public void addReview(int rating) {
-        totalRatings.add(rating);
-        int acc = 0;
-        for (int r:totalRatings) {
-            acc = r + acc;
+    public void addReviewUpdateStars(Review review) {
+        if(review instanceof TheaterReview){
+            throw new IllegalArgumentException("Theater review is not allowed");
         }
-        stars = acc/totalRatings.size();
+
+        totalReviews.add(review);
+        float acc = 0;
+        for (Review r:totalReviews) {
+            acc = (float)r.getRating() + acc;
+        }
+        stars = acc/totalReviews.size();
     }
 }
