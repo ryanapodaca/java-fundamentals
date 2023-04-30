@@ -7,8 +7,92 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LibraryTest {
-    @Test void someLibraryMethodReturnsTrue() {
-        Restaurant classUnderTest = new Restaurant();
-        assertTrue(classUnderTest.someLibraryMethod(), "someLibraryMethod should return 'true'");
+    @Test void testConstructorAndToStringRestaurant() {
+        Restaurant restaurant = new Restaurant("Bob's Burgers", "American Dining");
+        assertEquals( "Restaurant\nname= Bob's Burgers\nstars= 0.0\ncategory= American Dining", restaurant.toString());
+
     }
+
+    @Test void testAddingReviewsAndUpdatingStarsRestaurant(){
+        Restaurant restaurant = new Restaurant("Bob's Burgers", "American Dining");
+        Review review1 = new Review(5,"was good","Fred","Bob's Burgers");
+        Review review2 = new Review(1,"was bad","Denise","Bob's Burgers");
+        Review review3 = new Review(3,"was ok","Ernie","Bob's Burgers");
+
+        restaurant.addReviewUpdateStars(review1);
+        restaurant.addReviewUpdateStars(review2);
+        restaurant.addReviewUpdateStars(review3);
+        assertEquals(3, restaurant.totalReviews.size());
+        assertEquals(3.0, restaurant.stars);
+    }
+
+    @Test void testConstructorAndToStringShop() {
+        Shop shop = new Shop("Fresh", "Clothing", "$$$");
+        assertEquals( "Shop\nname= Fresh\nstars= 0.0\ndescription= Clothing\ndollarSigns= $$$", shop.toString());
+    }
+
+    @Test void testAddingReviewsAndUpdatingStarsShop(){
+        Shop shop = new Shop("Fresh", "Clothing", "$$$");
+        Review review1 = new Review(5,"was good","Fred","Fresh");
+        Review review2 = new Review(1,"was bad","Denise","Fresh");
+        Review review3 = new Review(3,"was ok","Ernie","Fresh");
+
+        shop.addReviewUpdateStars(review1);
+        shop.addReviewUpdateStars(review2);
+        shop.addReviewUpdateStars(review3);
+        assertEquals(3, shop.totalReviews.size());
+        assertEquals(3.0, shop.stars);
+    }
+
+    @Test void testConstructorAndToStringTheater() {
+        Theater theater = new Theater("Hallmark");
+        assertEquals( "Theater\nname= Hallmark\nstars= 0.0", theater.toString());
+    }
+
+    @Test void testAddingReviewsAndUpdatingStarsTheater(){
+        Theater theater = new Theater("Hallmark");
+        Review review1 = new Review(5,"was good","Fred","Hallmark");
+        Review review2 = new Review(1,"was bad","Denise","Hallmark");
+        TheaterReview review3 = new TheaterReview(3,"was ok","Ernie","Hallmark","The Lig Bebowski");
+
+        theater.addReviewUpdateStars(review1);
+        theater.addReviewUpdateStars(review2);
+        theater.addReviewUpdateStars(review3);
+        assertEquals(3, theater.totalReviews.size());
+        assertEquals(3.0, theater.stars);
+    }
+
+    @Test void testAddMoviesToTheater(){
+        Theater theater = new Theater("Hallmark");
+        theater.addMovie("The Lig Bebowski");
+        theater.addMovie("Wtar Sars");
+        theater.addMovie("Gorrest Fump");
+        assertEquals("The Lig Bebowski\nWtar Sars\nGorrest Fump\n",theater.getAllMovies());
+    }
+
+    @Test void testRemoveMoviesFromTheater(){
+        Theater theater = new Theater("Hallmark");
+        theater.addMovie("The Lig Bebowski");
+        theater.addMovie("Wtar Sars");
+        theater.addMovie("Gorrest Fump");
+        theater.removeMovie("Gorrest Fump");
+        assertEquals("The Lig Bebowski\nWtar Sars\n",theater.getAllMovies());
+    }
+
+    @Test void testExceptionIfTheaterReview(){
+        Shop shop = new Shop("Fresh", "Clothing", "$$$");
+        Restaurant restaurant = new Restaurant("Bob's Burgers", "American Dining");
+        TheaterReview review = new TheaterReview(3,"was ok","Ernie","Hallmark","The Lig Bebowski");
+        assertThrows(IllegalArgumentException.class, () -> shop.addReviewUpdateStars(review));
+        assertThrows(IllegalArgumentException.class, () -> restaurant.addReviewUpdateStars(review));
+
+    }
+
+
+
+
+
+
+
+
 }
