@@ -3,12 +3,33 @@
  */
 package linter;
 
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.io.File;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
+    public static void main(String[] args) {
+        String filePath = "./app/src/main/resources/gates.js";
+        String errorMessage = lintJavaScriptFile(filePath);
+        System.out.println(errorMessage);
     }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+    public static String lintJavaScriptFile(String filePath) {
+        StringBuilder errorMessage = new StringBuilder();
+        try {
+            Scanner scanner = new Scanner(new File(filePath));
+            int lineNum = 1;
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                    if (!line.isEmpty() && !line.endsWith("{") && !line.endsWith("}") && !line.contains("if") && !line.contains("else") && !line.endsWith(";")) {
+                        errorMessage.append("Line ").append(lineNum).append(": Missing semicolon.\n");
+                    }
+                    lineNum++;
+            }
+            scanner.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("File not found.");
+            }
+            return errorMessage.toString();
     }
 }
